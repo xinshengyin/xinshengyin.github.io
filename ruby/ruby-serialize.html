@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      ruby对象的序列化
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <h2 id="section">什么是序列化对象</h2>
+
+<p>在ruby中，有时候需要把一个对象存储起来，比如存到数据库里。
+一个ruby对象可能是各种各样的，可能是数组，也可能是一个自定义对象。</p>
+
+<p>如果直接把一个对象交给数据库，数据库就会抗议：你给我的这个东西我又不认识，我可不敢保证你来取的时候，我就能原样找出来还给你。
+这个时候ruby就会想办法：那我给你之前，我把这个对象包装成一个你能认出来的东西，比如字符。</p>
+
+<p>这个“包装”的过程就是序列化对象的过程，当ruby从数据库里取出对象的时候，是不能直接使用的，还需要还原对象，也就是反序列化。</p>
+
+<h2 id="ruby">ruby中序列化对象的方法</h2>
+
+<h3 id="marshal">Marshal</h3>
+
+<p>Marshal可以把对象转化成一个字节流。</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 先生成一个Array对象，包含一个Integer对象和Time对象</span>
+<span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">at</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span><span class="p">]</span>  <span class="c1"># =&gt; [1, 1970-01-01 08:00:01 +0800]</span>
+</code></pre>
+</div>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 序列化，序列化的对象是一个String实例</span>
+<span class="n">serialize_value</span> <span class="o">=</span> <span class="no">Marshal</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  
+<span class="c1"># =&gt; "\x04\b[\ai\x06Iu:\tTime\r \x80\x11\x80\x00\x00\x10\x00\a:\voffseti\x02\x80p:\tzoneI\"\bCST\x06:\x06ET"</span>
+
+<span class="c1"># 反序列化</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="no">Marshal</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">serialize_value</span><span class="p">)</span>
+<span class="c1"># =&gt; [1, 1970-01-01 08:00:01 +0800]</span>
+</code></pre>
+</div>
+
+<h3 id="yaml">YAML</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 序列化，</span>
+<span class="n">serialize_value</span> <span class="o">=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  
+<span class="c1"># =&gt; "---\n- 1\n- 1970-01-01 08:00:01.000000000 +08:00\n"</span>
+
+<span class="c1"># 反序列化</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">serialize_value</span><span class="p">)</span>
+<span class="c1"># =&gt; [1, 1970-01-01 08:00:01 +0800]</span>
+</code></pre>
+</div>
+
+<h3 id="json">JSON</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 序列化</span>
+<span class="n">serialize_value</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  
+<span class="c1"># =&gt; "[1,\"1970-01-01 08:00:01 +0800\"]"</span>
+
+<span class="c1"># 反序列化</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">serialize_value</span><span class="p">)</span>
+<span class="c1"># =&gt; [1, "1970-01-01 08:00:01 +0800"]</span>
+
+<span class="n">obj</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">class</span>
+<span class="c1"># =&gt; String</span>
+</code></pre>
+</div>
+
+<p>诶，跟想象中的有点不一样，怎么Time对象还原出来变成String对象了。
+这就是不同方法序列化之后的还原能力不同了，很明显Marshal在序列化对象的时候记录了很多信息，除了少数特殊情况，Marshal能够还原出绝大部分对象。
+所以尽量采用Marshal序列化对象。</p>
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>

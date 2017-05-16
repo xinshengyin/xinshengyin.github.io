@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      Rails日志实现探索（3）
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <h2 id="section">订阅者（接外包）的实现</h2>
+
+<h3 id="activesupportsubscriber-"><code class="highlighter-rouge">ActiveSupport::Subscriber</code> 负责干活的订阅者</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">e</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">parent</span> <span class="o">=</span> <span class="n">event_stack</span><span class="p">.</span><span class="nf">last</span>
+  <span class="n">parent</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="k">if</span> <span class="n">parent</span>
+
+  <span class="n">event_stack</span><span class="p">.</span><span class="nf">push</span> <span class="n">e</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">finished</span>  <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+  <span class="n">event</span>     <span class="o">=</span> <span class="n">event_stack</span><span class="p">.</span><span class="nf">pop</span>
+  <span class="n">event</span><span class="p">.</span><span class="nf">end</span> <span class="o">=</span> <span class="n">finished</span>
+  <span class="n">event</span><span class="p">.</span><span class="nf">payload</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+  <span class="nb">method</span> <span class="o">=</span> <span class="nb">name</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">).</span><span class="nf">first</span>
+  <span class="nb">send</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="activesupportlogsubscriber--activesupportsubscriber"><code class="highlighter-rouge">ActiveSupport::LogSubscriber &lt; ActiveSupport::Subscriber</code></h2>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="k">super</span> <span class="k">if</span> <span class="n">logger</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="k">super</span> <span class="k">if</span> <span class="n">logger</span>
+<span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="n">logger</span><span class="p">.</span><span class="nf">error</span> <span class="s2">"Could not log </span><span class="si">#{</span><span class="nb">name</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2"> event. </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">class</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>这里的 logger 实际是 Rails.logger</p>
+
+<p>##</p>
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>

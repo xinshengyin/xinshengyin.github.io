@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      require 的故事
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <h2 id="section">引子</h2>
+
+<p>关于<code class="highlighter-rouge">require</code>,一般我们接受到的知识是这样的：</p>
+
+<p>在ruby中，<code class="highlighter-rouge">require</code>是位于Kernel模块中的一个方法。其方法参数接受一个文件名，如果文件名不是绝对路径，则会依次加入$LOAD_PATH中的路径依次查找，只到找到为止。如果没有找到文件，则会报一个<code class="highlighter-rouge">LoadError</code>错误。</p>
+
+<p>下面我们来做个试验：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'a'</span>
+
+<span class="no">LoadError</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">load</span> <span class="n">such</span> <span class="n">file</span> <span class="o">--</span> <span class="n">a</span>
+<span class="n">from</span> <span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">rubygems</span><span class="o">/</span><span class="n">core_ext</span><span class="o">/</span><span class="n">kernel_require</span><span class="p">.</span><span class="nf">rb</span><span class="p">:</span><span class="mi">55</span><span class="ss">:in</span> <span class="sb">`require'
+
+</span></code></pre>
+</div>
+
+<p>可是这个报错信息是怎么回事？</p>
+
+<p><code class="highlighter-rouge">require</code>并没有调用系统默认的Kernel#require，而是调用了位于<code class="highlighter-rouge">rubygems</code>中<code class="highlighter-rouge">core/ext/kernel_require.rb</code>中的Kernel#require函数。RubyGem用自己的require替代了系统默认的版本，并藉此实现了它自己的逻辑。</p>
+
+<h2 id="gemrequire">gem中的<code class="highlighter-rouge">require</code></h2>
+
+<p>那gem中的<code class="highlighter-rouge">require</code>到底都做了些什么呢？当我们调用<code class="highlighter-rouge">require 'a'</code>的时候，如果能够在$LOAD_PATH 中找到这个文件，那<code class="highlighter-rouge">require</code>的任务就完成了。如果没有找到，<code class="highlighter-rouge">require</code>就会调用<code class="highlighter-rouge">gem 'a'</code>,如果能够找到a这个gem，则将其加入$LOAD_PATH 中。</p>
+
+<p>gem中的<code class="highlighter-rouge">require</code>源码中关于调用gem的部分：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">require</span> <span class="n">path</span>
+  <span class="no">RUBYGEMS_ACTIVATION_MONITOR</span><span class="p">.</span><span class="nf">enter</span>
+
+  <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="nf">to_path</span> <span class="k">if</span> <span class="n">path</span><span class="p">.</span><span class="nf">respond_to?</span> <span class="ss">:to_path</span>
+
+  <span class="n">spec</span> <span class="o">=</span> <span class="no">Gem</span><span class="p">.</span><span class="nf">find_unresolved_default_spec</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">spec</span>
+    <span class="no">Gem</span><span class="p">.</span><span class="nf">remove_unresolved_default_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+    <span class="n">gem</span><span class="p">(</span><span class="n">spec</span><span class="p">.</span><span class="nf">name</span><span class="p">)</span>  <span class="c1"># 在这里调用了gem这个方法</span>
+  <span class="k">end</span>
+
+  <span class="c1"># ……后续代码省略</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>gem中的<code class="highlighter-rouge">require</code>源码中，当gem方法把当前gem的路径加入到$LOAD_PATH后，继续调用原始<code class="highlighter-rouge">require</code>方法的部分：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">require</span> <span class="n">path</span>
+  <span class="c1"># ……省略代码</span>
+  <span class="k">return</span> <span class="n">gem_original_require</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>  <span class="c1"># 本方法中有多处这样的调用，gem_original_require 是gem定义的原生的 require 方法的别名方法</span>
+  <span class="c1"># ……省略代码</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="gemgem">gem中的<code class="highlighter-rouge">gem</code>方法</h2>
+
+<p>代码胜千言。我们在调用gem方法之前看下$LOAD_PATH 都有啥：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 进入irb</span>
+<span class="nb">puts</span> <span class="vg">$:</span>
+
+<span class="c1"># 返回结果如下</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">site_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">site_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin14</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">site_ruby</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">vendor_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">vendor_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin14</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">vendor_ruby</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin14</span><span class="o">.</span><span class="mi">0</span>
+</code></pre>
+</div>
+
+<p>接下来我们调用一下 gem ‘rails’</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">gem</span> <span class="s1">'rails'</span>
+<span class="c1"># =&gt; true</span>
+</code></pre>
+</div>
+
+<p>然后我们再看看$LOAD_PATH 发生了什么变化</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">i18n</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta1</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">thread_safe</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">tzinfo</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rack</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rack</span><span class="o">-</span><span class="nb">test</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">mini_portile</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">extensions</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin</span><span class="o">-</span><span class="mi">14</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">static</span><span class="o">/</span><span class="n">nokogiri</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">1</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">nokogiri</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">loofah</span><span class="o">-</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rails</span><span class="o">-</span><span class="n">html</span><span class="o">-</span><span class="n">sanitizer</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rails</span><span class="o">-</span><span class="n">deprecated_sanitizer</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rails</span><span class="o">-</span><span class="n">dom</span><span class="o">-</span><span class="n">testing</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">builder</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">erubis</span><span class="o">-</span><span class="mi">2</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">actionview</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">actionpack</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activemodel</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">arel</span><span class="o">-</span><span class="mi">6</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta1</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activerecord</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">globalid</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activejob</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">actionmailer</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">thor</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">19</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">railties</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">bundler</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">sprockets</span><span class="o">-</span><span class="n">rails</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta1</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rails</span><span class="o">-</span><span class="mi">4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">beta2</span><span class="o">/</span><span class="n">lib</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">site_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">site_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin14</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">site_ruby</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">vendor_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">vendor_ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin14</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="n">vendor_ruby</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+<span class="sr">/Users/</span><span class="n">qin</span><span class="o">/</span><span class="p">.</span><span class="nf">rbenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ruby</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin14</span><span class="o">.</span><span class="mi">0</span>
+</code></pre>
+</div>
+
+<p>多了好多内容，不仅把<code class="highlighter-rouge">rails</code>本身加入到了$LOAD_PATH中，还加入了rails依赖的其他gem，这下就可以愉快的使用 require 了。</p>
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>

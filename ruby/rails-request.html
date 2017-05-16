@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      Rails中的request
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <p>每个web请求都有对应的 Request和Response，在Rails中，我们如何获取关于request的信息呢？</p>
+
+<h3 id="request">Request对象</h3>
+
+<p>在controller的实例中，可以通过request方法获取request对象</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span>
+<span class="c1"># =&gt; ActionDispatch::Request对象</span>
+</code></pre>
+</div>
+
+<h2 id="request-1">Request对象包含的内容</h2>
+
+<h3 id="headers">Headers</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">headers</span>
+<span class="c1"># =&gt; #&lt;ActionDispatch::Http::Headers:0x007ff849c55a50&gt;</span>
+</code></pre>
+</div>
+<p>headers分为：
+<code class="highlighter-rouge">request.headers</code>
+<code class="highlighter-rouge">response.headers</code></p>
+
+<h3 id="params">Params</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">params</span> <span class="c1"># =&gt; ActiveSupport::HashWithIndifferentAccess对象</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">parameters</span> <span class="c1"># 同request.params</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">path_parameters</span>
+</code></pre>
+</div>
+<p><code class="highlighter-rouge">params</code> 返回的是 ActionController::Parameters 对象</p>
+
+<h3 id="method">Method</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">method</span> <span class="c1"># =&gt; "GET"，String对象</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">method_symbol</span>  <span class="c1"># =&gt; :get，Symbol对象</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">request_method_symbol</span>
+
+<span class="n">request</span><span class="p">.</span><span class="nf">get?</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">post?</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">put?</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">patch?</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">delete?</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">head?</span>
+</code></pre>
+</div>
+
+<h3 id="url">Url</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">fullpath</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">original_fullpath</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">original_url</span>
+</code></pre>
+</div>
+
+<h3 id="section">请求内容</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">body</span>  <span class="c1"># =&gt; StringIO对象</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body_stream</span>
+
+<span class="n">request</span><span class="p">.</span><span class="nf">raw_post</span>
+
+<span class="n">request</span><span class="p">.</span><span class="nf">form_data?</span>
+
+<span class="n">request</span><span class="p">.</span><span class="nf">xml_http_request?</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">authorization</span>
+</code></pre>
+</div>
+
+<h3 id="mime">MIME等信息</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">media_type</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">accepts</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">content_type</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">formats</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">format</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">variant</span>
+</code></pre>
+</div>
+
+<h3 id="section-1">客户端、服务端、中间件信息</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">ip</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">remote_ip</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">local?</span>
+
+<span class="n">request</span><span class="p">.</span><span class="nf">uuid</span>
+
+<span class="n">request</span><span class="p">.</span><span class="nf">server_software</span>
+</code></pre>
+</div>
+
+<h3 id="section-2">缓存相关信息</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">if_modified_since</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">if_none_match</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">if_none_match_etags</span>
+</code></pre>
+</div>
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>

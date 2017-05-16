@@ -1,0 +1,69 @@
+
+  http://www.xinshengyin.com/about
+
+  http://www.xinshengyin.com/category
+
+  http://www.xinshengyin.com/
+
+  http://www.xinshengyin.com/sitemap.txt
+
+
+  http://www.xinshengyin.com/ruby/programer-think-with-product
+
+  http://www.xinshengyin.com/ruby/file-dir-pathname
+
+  http://www.xinshengyin.com/what-is-pleaure
+
+  http://www.xinshengyin.com/ruby/trace-point
+
+  http://www.xinshengyin.com/ruby/return-break-next
+
+  http://www.xinshengyin.com/web-and-sales
+
+  http://www.xinshengyin.com/ruby/ruby-module-position
+
+  http://www.xinshengyin.com/ruby/object-space
+
+  http://www.xinshengyin.com/ruby/activesupport-notifications-3
+
+  http://www.xinshengyin.com/ruby/activesupport-notifications-2
+
+  http://www.xinshengyin.com/ruby/activesupport-notifications
+
+  http://www.xinshengyin.com/ruby/rails-request
+
+  http://www.xinshengyin.com/socket-basic
+
+  http://www.xinshengyin.com/ruby/rescue-exception
+
+  http://www.xinshengyin.com/git/remove-git-history
+
+  http://www.xinshengyin.com/ruby/ruby-observer-pattern
+
+  http://www.xinshengyin.com/git/git-sheet
+
+  http://www.xinshengyin.com/ruby/ruby-require
+
+  http://www.xinshengyin.com/database/mysql-sheet
+
+  http://www.xinshengyin.com/ruby/ruby-code-and-decode
+
+  http://www.xinshengyin.com/ruby/research-ruby
+
+  http://www.xinshengyin.com/ruby/rails-middleware
+
+  http://www.xinshengyin.com/ruby/ruby-serialize
+
+  http://www.xinshengyin.com/ruby/activesupport-message-verifier
+
+  http://www.xinshengyin.com/database/migrate-from-mongodb-to-mysql
+
+  http://www.xinshengyin.com/git/git-skill-ignore
+
+  http://www.xinshengyin.com/ruby/how-to-write-rakefile
+
+  http://www.xinshengyin.com/ruby/ruby-env
+
+  http://www.xinshengyin.com/ruby/rack-based-app-boot
+
+  http://www.xinshengyin.com/3-vacuous-topics

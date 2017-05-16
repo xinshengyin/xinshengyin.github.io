@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      理理File/Dir/Pathname（一）
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <h2 id="section">引子</h2>
+<p>最近在写一个涉及到文件操作的小工具，在ruby中有很多方法可以获取文件，对文件进行操作，今天就对这些操作进行一个整理。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>描述</th>
+      <th>返回结果类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">__FILE__</code></td>
+      <td><code class="highlighter-rouge">__FILE__</code>是一个关键字，返回当前文件的绝对路径，包含文件名本身</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">File.dirname(__FILE__)</code></td>
+      <td>获取当前文件目录</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">Pathname.new(__FILE__)</code></td>
+      <td>获取当前文件目录</td>
+      <td>Pathname</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">Dir.pwd</code></td>
+      <td>返回当前工作目录，别名方法有：<code class="highlighter-rouge">Dir.getwd</code></td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>`pwd`</td>
+      <td>返回当前工作目录</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>system(‘pwd’)</td>
+      <td>打印当前工作目录，返回值为ture</td>
+      <td>TrueClass</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-1">说明：</h2>
+<h3 id="pathname">关于<code class="highlighter-rouge">Pathname</code>类</h3>
+
+<p>ruby提供了一个标准库，<code class="highlighter-rouge">pathname</code>。</p>
+
+<h3 id="section-2">调用系统命令</h3>
+<p>有两种方法可以调用系统命令，一种是使用两个“`”符号将系统命令包起来，一种是使用“system”方法。这两种方法的返回值有所区别。示例如下：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sb">`pwd`</span>
+<span class="c1"># =&gt; "/Users/qin/project/blog\n"</span>
+
+<span class="nb">system</span> <span class="s1">'pwd'</span>
+<span class="c1"># 这里会答应出结果</span>
+<span class="c1"># =&gt; true</span>
+</code></pre>
+</div>
+
+<p>“`”包装的命令会返回字符串，<code class="highlighter-rouge">system</code>会将系统命令返回的字符串打印出来，并返回<code class="highlighter-rouge">true/false/nil</code>中的一个值。</p>
+
+<h3 id="section-3">当前工作目录，与当前文件目录</h3>
+
+<p>这是两个容易混淆的概念，一个是脚本所在的目录，一个是你在哪个目录下调用的脚本，Dir.pwd返回的就是哪个目录。</p>
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      ActiveSupport宝藏之MessageVerifier
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <p>rails的<code class="highlighter-rouge">ActiveSupport</code>组件提供了很多非常有用的小功能，如果善于利用的话，可以使我们在实际项目中减少很多重复造轮子的事情。
+今天我们介绍的主角就是：<code class="highlighter-rouge">MessageVerifier</code>,<code class="highlighter-rouge">MessageVerifier</code> 提供了加密和解密消息的功能，可以有效的防止信息被伪造。
+其源码位于<code class="highlighter-rouge">active_support/message_verifier.rb</code>文件，下面介绍使用方法及原理：</p>
+
+<h3 id="section">应用场景</h3>
+
+<p>正常情况下，http协议对信息都是进行明文传输，用过抓包工具的同学一定印象很深刻，我们通过form表单提交的密码信息实际是明文传输非常透明的。
+当然我们可以使用https对web信息进行加密后传输，不过<code class="highlighter-rouge">https</code>会牺牲一些性能和速度，于是一些敏感信息我们便可以单独加密传输。</p>
+
+<p>举个例子，我们经常在cookie中存储 remember me 的相关信息，包括过期时间等内容。这个时候我们就可以对相关内容进行加密。</p>
+
+<p>本周的开发工作中，我也遇到了一个需要加密传输的需求：当我们的用户连续签到达到7天，我们将赋予这个用户解锁某个功能的权限。我们会带着用户token参数去调用一个接口。
+用户是很容易知道自己的token的，如果某个用户用自己的token去请求这个接口，不就为自己开通了权限。这个时候我们最好的办法就是对token进行加密，然后收到请求后再解密。</p>
+
+<h3 id="section-1">工作原理</h3>
+
+<p>加密的过程就是以某个流程将信息转化成另一个样子，解密的过程就是以相对的过程将“另一个样子”的信息还原成本来的信息。所以说这个类中一定提供了两个方法，一个是加密的，一个是解密的。
+这两个对应的方法是：</p>
+
+<ul>
+  <li>加密：<code class="highlighter-rouge">generate</code></li>
+  <li>解密：<code class="highlighter-rouge">verify</code></li>
+</ul>
+
+<p>这两个方法是<code class="highlighter-rouge">ActiveSupport::MessageVerifier</code>的对象方法。下面我们先来 new 一个对象。
+<code class="highlighter-rouge">ActiveSupport::MessageVerifier</code>对象会包含下面几个信息：</p>
+
+<ul>
+  <li><code class="highlighter-rouge">@secret</code>: 俗称暗号，没有默认值，new方法中必须提供；</li>
+  <li><code class="highlighter-rouge">@digest</code>: 采用的摘要算法，默认<code class="highlighter-rouge">SHA1</code>，可选的有：<code class="highlighter-rouge">MD5 / SHA1 / SHA2</code>等；</li>
+  <li><code class="highlighter-rouge">@serializer</code>: 对象序列化方法，默认是：<code class="highlighter-rouge">Marshal</code>，可选的有<code class="highlighter-rouge">YAML, JSON, Marshal</code>等；</li>
+</ul>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># new 对象</span>
+<span class="vi">@verifier</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">MessageVerifier</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'123456'</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;ActiveSupport::MessageVerifier:0x007fe522132ba8 @secret="123456", @digest="SHA1", @serializer=Marshal&gt;</span>
+
+<span class="c1"># new 对象并指定serializer 为 YAML</span>
+<span class="vi">@verifier</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">MessageVerifier</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'123456'</span><span class="p">,</span> <span class="ss">serializer: </span><span class="no">YAML</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;ActiveSupport::MessageVerifier:0x007fe522103448 @secret="123456", @digest="SHA1", @serializer=Psych&gt;</span>
+</code></pre>
+</div>
+
+<p>要加密的内容可为任何形式的对象，<code class="highlighter-rouge">MessageVerifier</code>对象会以指定的对象序列化方法进行序列化。
+示例中我们加密的对象是一个包含用户id及过期时间的数组：<code class="highlighter-rouge">[user_id, time]</code></p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 加密</span>
+<span class="n">cookies</span><span class="p">[</span><span class="ss">:remember_me</span><span class="p">]</span> <span class="o">=</span> <span class="vi">@verifier</span><span class="p">.</span><span class="nf">generate</span><span class="p">([</span><span class="vi">@user</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="nf">weeks</span><span class="p">.</span><span class="nf">from_now</span><span class="p">])</span>
+
+<span class="c1"># 解密</span>
+<span class="nb">id</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="vi">@verifier</span><span class="p">.</span><span class="nf">verify</span><span class="p">(</span><span class="n">cookies</span><span class="p">[</span><span class="ss">:remember_me</span><span class="p">])</span>
+
+<span class="c1"># 应用：判断是否过期并查找用户</span>
+<span class="k">if</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+  <span class="vi">@current_user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>

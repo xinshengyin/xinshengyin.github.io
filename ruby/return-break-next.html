@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      ruby中的return
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <p>在ruby中，有三个关键字可以从一段代码中返回，分别是<code class="highlighter-rouge">return</code>、<code class="highlighter-rouge">next</code>、<code class="highlighter-rouge">break</code>，今天主要研究一下return。</p>
+
+<h2 id="return">方法中的return</h2>
+
+<p>在ruby中调用一个方法，默认的情况下，会一行一行依次执行方法中的代码，方法的值是最后一行的值。</p>
+
+<p>return可以改变这个方法一行一行执行的行为，当遇到return，方法会直接返回（rescue、ensure例外）。</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span>
+  <span class="nb">puts</span> <span class="s1">'first puts'</span>
+  <span class="k">return</span>
+  <span class="nb">puts</span> <span class="s1">'next puts'</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+<p>在上面这个例子中，<code class="highlighter-rouge">puts 'next puts'</code>这行代码永远不会执行。同时我们可以显示指定返回值，默认为nil。例如上面这个例子没有指定返回值，其返回值则为nil。</p>
+
+<h2 id="procreturn">proc中的return</h2>
+
+<p>代码胜千言，先看几个例子：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test1</span>
+  <span class="nb">proc</span> <span class="o">=</span> <span class="no">Proc</span><span class="p">.</span><span class="nf">new</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">10</span> <span class="p">}</span>
+  <span class="nb">puts</span> <span class="s1">'puts here'</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">test2</span>
+  <span class="nb">proc</span> <span class="o">=</span> <span class="no">Proc</span><span class="p">.</span><span class="nf">new</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">10</span> <span class="p">}</span>
+  <span class="nb">proc</span><span class="p">.</span><span class="nf">call</span>
+  <span class="nb">puts</span> <span class="s1">'puts here'</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">test3</span>
+  <span class="k">return</span> <span class="mi">10</span>
+  <span class="nb">puts</span> <span class="s1">'puts here'</span>
+<span class="k">end</span>
+
+<span class="n">test4</span> <span class="o">=</span> <span class="no">Proc</span><span class="p">.</span><span class="nf">new</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">10</span> <span class="p">}</span>
+<span class="n">test4</span><span class="p">.</span><span class="nf">call</span>
+</code></pre>
+</div>
+<p>在上面的例子中：</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">test1</code>方法，<code class="highlighter-rouge">puts 'puts here'</code>能够执行，返回值为最后一行代码的返回值。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">test2</code>方法，返回值为10。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">test3</code>方法的行为和<code class="highlighter-rouge">test2</code>是等价的。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">test4</code>在call调用的时候会报错，错误信息是：<code class="highlighter-rouge">LocalJumpError: unexpected return</code>;</p>
+  </li>
+</ul>
+
+<p>为什么会这样，其实<code class="highlighter-rouge">test2</code>和<code class="highlighter-rouge">test3</code>已经告诉我们答案了，在proc中使用 return 和在方法本身中使用return的效果是一样的。</p>
+
+<p>而<code class="highlighter-rouge">test4</code>的例子就相当于你直接执行<code class="highlighter-rouge">return 10</code>，报的错误也同样是：<code class="highlighter-rouge">LocalJumpError: unexpected return</code></p>
+
+<p><code class="highlighter-rouge">LocalJumpError</code>这个错误其实很有意思，如果拦截这个错误，是依然可以拿到return的返回值的。
+下面是我在pry中做的实验。</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">return</span> <span class="mi">10</span>
+<span class="c1">#=&gt; LocalJumpError: unexpected return</span>
+
+<span class="n">_ex_</span>
+<span class="c1">#=&gt; &lt;LocalJumpError: unexpected return&gt;</span>
+
+<span class="n">_ex_</span><span class="p">.</span><span class="nf">class</span>
+<span class="c1">#=&gt; LocalJumpError &lt; StandardError</span>
+
+<span class="n">_ex_</span><span class="p">.</span><span class="nf">exit_value</span>
+<span class="c1">#=&gt; 10</span>
+
+<span class="n">_ex_</span><span class="p">.</span><span class="nf">reason</span>
+<span class="c1">#=&gt; :return</span>
+</code></pre>
+</div>
+
+<h2 id="lambda-return">lambda 中的return</h2>
+
+<p>还是继续看例子：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">test1</span> <span class="o">=</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s1">'first puts'</span><span class="p">;</span> <span class="k">return</span> <span class="mi">10</span><span class="p">;</span> <span class="nb">puts</span> <span class="s1">'next puts'</span> <span class="p">}</span>
+<span class="n">test1</span><span class="p">.</span><span class="nf">call</span>
+
+<span class="c1"># first puts</span>
+<span class="c1">#=&gt; 10</span>
+
+<span class="k">def</span> <span class="nf">test2</span>
+  <span class="n">la</span> <span class="o">=</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s1">'first puts'</span><span class="p">;</span> <span class="k">return</span> <span class="mi">10</span><span class="p">;</span> <span class="nb">puts</span> <span class="s1">'next puts'</span> <span class="p">}</span>
+  <span class="n">la</span><span class="p">.</span><span class="nf">call</span>
+  <span class="nb">puts</span> <span class="s1">'puts here'</span>
+<span class="k">end</span>
+
+<span class="c1"># first puts</span>
+<span class="c1"># puts here</span>
+<span class="c1">#=&gt; nil</span>
+</code></pre>
+</div>
+
+<p>lambda对象，跟proc对象不一样，在lambda中，return是从lambda代码块中返回。在proc中，return是从proc代码块所在的上下文环境中返回。</p>
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>

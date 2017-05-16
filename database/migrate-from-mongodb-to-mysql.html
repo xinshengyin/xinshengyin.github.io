@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新声音</title>
+  
+  <link href="/assets/css/application.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="/assets/js/jquery.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+</head>
+
+<body class="">
+
+  <div class="ui top attached segment">
+  <div class="ui menu secondary">
+
+  
+
+  
+  <a href="/" class="item">首页</a>
+  
+
+  
+
+  
+  <a href="/category" class="item">分类</a>
+  
+
+  
+
+  
+  <a href="/about" class="item">关于我</a>
+  
+
+  
+</div>
+</div>
+
+<main>
+  <div class="ui invisible side">
+  <div class="sidebar">
+    <div class="ui inverted vertical fluid icon menu">
+	<div class="header center link item" id="close_side">
+		<i class="content icon"></i>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>ruby</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
+			
+			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
+			
+			<a href="/ruby/trace-point" class="item">TracePoint介绍</a>
+			
+			<a href="/ruby/return-break-next" class="item">ruby中的return</a>
+			
+			<a href="/ruby/ruby-module-position" class="item">如何动态改变某个class的祖先链</a>
+			
+			<a href="/ruby/object-space" class="item">ObjectSpace介绍</a>
+			
+			<a href="/ruby/activesupport-notifications-3" class="item">Rails日志实现探索（3）</a>
+			
+			<a href="/ruby/activesupport-notifications-2" class="item">Rails日志实现探索（2）</a>
+			
+			<a href="/ruby/activesupport-notifications" class="item">Rails日志实现探索（1）</a>
+			
+			<a href="/ruby/rails-request" class="item">Rails中的request</a>
+			
+			<a href="/ruby/rescue-exception" class="item">rescue exception in ruby</a>
+			
+			<a href="/ruby/ruby-observer-pattern" class="item">设计模式之观察者模式</a>
+			
+			<a href="/ruby/ruby-require" class="item">require 的故事</a>
+			
+			<a href="/ruby/ruby-code-and-decode" class="item">ruby中的编码</a>
+			
+			<a href="/ruby/research-ruby" class="item">研究ruby的一些小技巧</a>
+			
+			<a href="/ruby/rails-middleware" class="item">Rails中间件</a>
+			
+			<a href="/ruby/ruby-serialize" class="item">ruby对象的序列化</a>
+			
+			<a href="/ruby/activesupport-message-verifier" class="item">ActiveSupport宝藏之MessageVerifier</a>
+			
+			<a href="/ruby/how-to-write-rakefile" class="item">如何写rakefile</a>
+			
+			<a href="/ruby/ruby-env" class="item">Ruby on Rails 环境及准备</a>
+			
+			<a href="/ruby/rack-based-app-boot" class="item">基于Rack的项目初始化</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>git</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/git/remove-git-history" class="item">如何移除某次提交之前的版本历史</a>
+			
+			<a href="/git/git-sheet" class="item">Git 不常用的好用的命令</a>
+			
+			<a href="/git/git-skill-ignore" class="item">Git高级技巧之忽略文件</a>
+			
+		</div>
+	</div>
+	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>database</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/database/mysql-sheet" class="item">Mysql数据库编码</a>
+			
+			<a href="/database/migrate-from-mongodb-to-mysql" class="item">从mongodb向mysql迁移数据</a>
+			
+		</div>
+	</div>
+	
+</div>
+  </div>
+  <div class="content">
+    <div class="ui grid">
+  <div class="sixteen wide column">
+
+    <h1 class="ui top attached center aligned header">
+      从mongodb向mysql迁移数据
+
+      
+    </h1>
+
+    <div class="ui attached segment">
+    <h2 id="section">数据迁移指南</h2>
+
+<h3 id="mongodbcsv">从mongodb导出csv格式数据</h3>
+
+<ul>
+  <li>命令：<code class="highlighter-rouge">mongoexport</code>
+    <h4 id="section-1">参数</h4>
+  </li>
+  <li><code class="highlighter-rouge">-d</code>: 指定数据库，<code class="highlighter-rouge">-d status_dev</code></li>
+  <li><code class="highlighter-rouge">-c</code>: 指定collicitons，<code class="highlighter-rouge">-c users</code></li>
+  <li><code class="highlighter-rouge">-q</code>: 指定查询条件，注意条件中出现的<code class="highlighter-rouge">$</code>符号需要转义<code class="highlighter-rouge">\$</code></li>
+  <li><code class="highlighter-rouge">--csv</code>: 导出为csv格式</li>
+  <li><code class="highlighter-rouge">-f</code>: 指定导出的列，csv必须，<code class="highlighter-rouge">-f user_key,token,user_behavior._id</code></li>
+  <li><code class="highlighter-rouge">-o</code>: 指定导出文件及位置，<code class="highlighter-rouge">-o ~/work/users.csv</code></li>
+</ul>
+
+<p>完整示例：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mongoexport <span class="se">\</span>
+-d status_dev <span class="se">\</span>
+-c users <span class="se">\</span>
+-q <span class="s2">"{'user_behavior.current_thin_plan_milestone': {'</span><span class="se">\$</span><span class="s2">ne': null} }"</span> <span class="se">\</span>
+--csv <span class="se">\</span>
+-f user_key,user_behavior.current_thin_plan_milestone,user_behavior.thin_plan_milestone_completed_on <span class="se">\</span>
+-o ~/work/users.csv
+</code></pre>
+</div>
+
+<h3 id="csvmysql">导入csv格式数据至mysql</h3>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">load</span> <span class="k">data</span> <span class="n">infile</span> <span class="s1">'~/work/users.csv'</span>   <span class="c1">-- 为了安全，如果文件路径为根路径，需要使用load data local infile</span>
+<span class="k">into</span> <span class="k">table</span> <span class="n">users</span>
+<span class="n">fields</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">','</span>  <span class="c1">-- 字段之间以逗号分隔</span>
+<span class="n">fields</span> <span class="n">enclosed</span> <span class="k">by</span> <span class="s1">'"'</span>  <span class="c1">-- 字符串以半角双引号包围</span>
+<span class="n">fields</span> <span class="n">escaped</span> <span class="k">by</span> <span class="s1">'"'</span>  <span class="c1">-- 字符串本身的双引号用"转义，即用两个双引号表示，也有用\转义</span>
+<span class="n">lines</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">'</span><span class="se">\r\n</span><span class="s1">'</span>  <span class="c1">-- 数据行之间以\r\n分隔</span>
+<span class="k">ignore</span> <span class="mi">1</span> <span class="n">lines</span><span class="p">;</span>  <span class="c1">-- 另外，第一行标题行需要单独设置。</span>
+</code></pre>
+</div>
+
+<p>里面最关键的部分就是格式参数，这个参数是根据RFC4180文档设置的，该文档全称Common Format and MIME Type for Comma-Separated Values (CSV) Files，其中详细描述了CSV格式。</p>
+
+
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="ui divider"></div>
+  <div class="ui center aligned segment basic">
+    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">版权所有</p>
+  </div>
+</footer>
+
+
+  <script src="/assets/js/footer.js"></script>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=39431539" charset="UTF-8"></script>
+</body>
+
+</html>
