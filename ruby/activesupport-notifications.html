@@ -10,6 +10,7 @@
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/semantic.js"></script>
+  <script src="/assets/js/turbolinks.js"></script>
 </head>
 
 <body class="">
@@ -131,17 +132,16 @@
 </div>
   </div>
   <div class="content">
-    <div class="ui grid">
-  <div class="sixteen wide column">
+    <div class="ui basic segment">
 
-    <h1 class="ui top attached center aligned header">
-      Rails日志实现探索（1）
+<h1 class="ui top attached center aligned header">
+  Rails日志实现探索（1）
 
-      
-    </h1>
+  
+</h1>
 
-    <div class="ui attached segment">
-    <h3 id="section">概述</h3>
+<div class="ui bottom attached segment">
+<h3 id="section">概述</h3>
 <p>我一直很好奇在Rails中，日志是如何记录一个Rails App运行的信息的。我查看了一下Rails的中间件，发现了<code class="highlighter-rouge">Rails::Rack::Logger</code></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code># rake middleware
@@ -185,9 +185,8 @@ use ActionDispatch::ShowExceptions
   <li>消息订阅：<code class="highlighter-rouge">ActiveSupport::LogSubscriber</code></li>
 </ul>
 
-    </div>
+</div>
 
-  </div>
 </div>
   </div>
 </div>

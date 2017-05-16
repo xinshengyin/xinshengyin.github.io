@@ -10,6 +10,7 @@
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/semantic.js"></script>
+  <script src="/assets/js/turbolinks.js"></script>
 </head>
 
 <body class="">
@@ -131,17 +132,16 @@
 </div>
   </div>
   <div class="content">
-    <div class="ui grid">
-  <div class="sixteen wide column">
+    <div class="ui basic segment">
 
-    <h1 class="ui top attached center aligned header">
-      如何移除某次提交之前的版本历史
+<h1 class="ui top attached center aligned header">
+  如何移除某次提交之前的版本历史
 
-      
-    </h1>
+  
+</h1>
 
-    <div class="ui attached segment">
-    <h3 id="step-1">step-1：查看相关提交的包含队形</h3>
+<div class="ui bottom attached segment">
+<h3 id="step-1">step-1：查看相关提交的包含队形</h3>
 
 <p>命令： <code class="highlighter-rouge">git log --pretty=raw</code>  查看详细的log信息</p>
 
@@ -189,9 +189,8 @@
 <p><code class="highlighter-rouge">git cherry-pick &lt;commit&gt;</code>
 <code class="highlighter-rouge">git replace &lt;old commit&gt; &lt;new commit&gt;</code></p>
 
-    </div>
+</div>
 
-  </div>
 </div>
   </div>
 </div>

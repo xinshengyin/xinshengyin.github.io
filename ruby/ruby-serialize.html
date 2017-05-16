@@ -10,6 +10,7 @@
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/semantic.js"></script>
+  <script src="/assets/js/turbolinks.js"></script>
 </head>
 
 <body class="">
@@ -131,17 +132,16 @@
 </div>
   </div>
   <div class="content">
-    <div class="ui grid">
-  <div class="sixteen wide column">
+    <div class="ui basic segment">
 
-    <h1 class="ui top attached center aligned header">
-      ruby对象的序列化
+<h1 class="ui top attached center aligned header">
+  ruby对象的序列化
 
-      
-    </h1>
+  
+</h1>
 
-    <div class="ui attached segment">
-    <h2 id="section">什么是序列化对象</h2>
+<div class="ui bottom attached segment">
+<h2 id="section">什么是序列化对象</h2>
 
 <p>在ruby中，有时候需要把一个对象存储起来，比如存到数据库里。
 一个ruby对象可能是各种各样的，可能是数组，也可能是一个自定义对象。</p>
@@ -204,9 +204,8 @@
 这就是不同方法序列化之后的还原能力不同了，很明显Marshal在序列化对象的时候记录了很多信息，除了少数特殊情况，Marshal能够还原出绝大部分对象。
 所以尽量采用Marshal序列化对象。</p>
 
-    </div>
+</div>
 
-  </div>
 </div>
   </div>
 </div>

@@ -10,6 +10,7 @@
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/semantic.js"></script>
+  <script src="/assets/js/turbolinks.js"></script>
 </head>
 
 <body class="">
@@ -131,17 +132,16 @@
 </div>
   </div>
   <div class="content">
-    <div class="ui grid">
-  <div class="sixteen wide column">
+    <div class="ui basic segment">
 
-    <h1 class="ui top attached center aligned header">
-      如何动态改变某个class的祖先链
+<h1 class="ui top attached center aligned header">
+  如何动态改变某个class的祖先链
 
-      
-    </h1>
+  
+</h1>
 
-    <div class="ui attached segment">
-    <p>在rails中，一个Controller的祖先链中定义了数个名为<code class="highlighter-rouge">process_action</code>的方法。</p>
+<div class="ui bottom attached segment">
+<p>在rails中，一个Controller的祖先链中定义了数个名为<code class="highlighter-rouge">process_action</code>的方法。</p>
 
 <p>分别位于如下<code class="highlighter-rouge">module</code>中：</p>
 
@@ -192,9 +192,8 @@
 
 <p>下一个问题：Controller祖先链中的大部分module都extend了<code class="highlighter-rouge">ActiveSupport::Concern</code>，这个将当前模块的祖先链扁平化了？所以include的自定义模块并不能出现在祖先链中。如上例中，我好不容易才找了一个没有extend concern 模块的module。</p>
 
-    </div>
+</div>
 
-  </div>
 </div>
   </div>
 </div>
