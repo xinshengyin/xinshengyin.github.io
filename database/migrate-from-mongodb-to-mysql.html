@@ -141,13 +141,13 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="section">数据迁移指南</h2>
+<h2 id="数据迁移指南">数据迁移指南</h2>
 
-<h3 id="mongodbcsv">从mongodb导出csv格式数据</h3>
+<h3 id="从mongodb导出csv格式数据">从mongodb导出csv格式数据</h3>
 
 <ul>
   <li>命令：<code class="highlighter-rouge">mongoexport</code>
-    <h4 id="section-1">参数</h4>
+    <h4 id="参数">参数</h4>
   </li>
   <li><code class="highlighter-rouge">-d</code>: 指定数据库，<code class="highlighter-rouge">-d status_dev</code></li>
   <li><code class="highlighter-rouge">-c</code>: 指定collicitons，<code class="highlighter-rouge">-c users</code></li>
@@ -169,7 +169,7 @@
 </code></pre>
 </div>
 
-<h3 id="csvmysql">导入csv格式数据至mysql</h3>
+<h3 id="导入csv格式数据至mysql">导入csv格式数据至mysql</h3>
 
 <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">load</span> <span class="k">data</span> <span class="n">infile</span> <span class="s1">'~/work/users.csv'</span>   <span class="c1">-- 为了安全，如果文件路径为根路径，需要使用load data local infile</span>
 <span class="k">into</span> <span class="k">table</span> <span class="n">users</span>

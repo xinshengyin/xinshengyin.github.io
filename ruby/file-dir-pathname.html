@@ -141,7 +141,7 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="section">引子</h2>
+<h2 id="引子">引子</h2>
 <p>最近在写一个涉及到文件操作的小工具，在ruby中有很多方法可以获取文件，对文件进行操作，今天就对这些操作进行一个整理。</p>
 
 <table>
@@ -186,12 +186,12 @@
   </tbody>
 </table>
 
-<h2 id="section-1">说明：</h2>
-<h3 id="pathname">关于<code class="highlighter-rouge">Pathname</code>类</h3>
+<h2 id="说明">说明：</h2>
+<h3 id="关于pathname类">关于<code class="highlighter-rouge">Pathname</code>类</h3>
 
 <p>ruby提供了一个标准库，<code class="highlighter-rouge">pathname</code>。</p>
 
-<h3 id="section-2">调用系统命令</h3>
+<h3 id="调用系统命令">调用系统命令</h3>
 <p>有两种方法可以调用系统命令，一种是使用两个“`”符号将系统命令包起来，一种是使用“system”方法。这两种方法的返回值有所区别。示例如下：</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sb">`pwd`</span>
@@ -205,7 +205,7 @@
 
 <p>“`”包装的命令会返回字符串，<code class="highlighter-rouge">system</code>会将系统命令返回的字符串打印出来，并返回<code class="highlighter-rouge">true/false/nil</code>中的一个值。</p>
 
-<h3 id="section-3">当前工作目录，与当前文件目录</h3>
+<h3 id="当前工作目录与当前文件目录">当前工作目录，与当前文件目录</h3>
 
 <p>这是两个容易混淆的概念，一个是脚本所在的目录，一个是你在哪个目录下调用的脚本，Dir.pwd返回的就是哪个目录。</p>
 

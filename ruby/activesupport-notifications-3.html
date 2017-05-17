@@ -141,9 +141,9 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="section">订阅者（接外包）的实现</h2>
+<h2 id="订阅者接外包的实现">订阅者（接外包）的实现</h2>
 
-<h3 id="activesupportsubscriber-"><code class="highlighter-rouge">ActiveSupport::Subscriber</code> 负责干活的订阅者</h3>
+<h3 id="activesupportsubscriber-负责干活的订阅者"><code class="highlighter-rouge">ActiveSupport::Subscriber</code> 负责干活的订阅者</h3>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="n">e</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>

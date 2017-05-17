@@ -141,7 +141,7 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="section">引子</h2>
+<h2 id="引子">引子</h2>
 <p>最近发布了一次app升级，发现日志里总是报一个警告：<code class="highlighter-rouge">Digest::Digest is deprecated; use Digest</code>。</p>
 
 <p>已经确定这个错误不是从app里报出来的，而是来自于某个依赖的gem。</p>
@@ -150,7 +150,7 @@
 
 <p>在网上找解决方案的时候发现了一个方法：<code class="highlighter-rouge">set_trace_func</code>。在新版本的ruby（2.1.5以上）中，这个方法已经废弃了，ruby提供了一个更好的的替代：核心类<code class="highlighter-rouge">TracePoint</code>。</p>
 
-<h2 id="tracepoint">TracePoint介绍</h2>
+<h2 id="tracepoint介绍">TracePoint介绍</h2>
 
 <p><code class="highlighter-rouge">TracePoint</code>可以用来收集特定的事件在被调用时的信息。</p>
 
@@ -201,7 +201,7 @@
 
 <p>当然并不是所有的事件都支持这些信息，如果调用的事件不支持某个事件的时候，将会抛出一个<code class="highlighter-rouge">RuntimeError</code>。</p>
 
-<h2 id="section-1">使用实战</h2>
+<h2 id="使用实战">使用实战</h2>
 
 </div>
 

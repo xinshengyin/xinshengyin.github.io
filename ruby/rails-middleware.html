@@ -141,9 +141,9 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="rails-">rails 常见中间件介绍</h2>
+<h2 id="rails-常见中间件介绍">rails 常见中间件介绍</h2>
 
-<h3 id="rack">Rack中定义的中间件</h3>
+<h3 id="rack中定义的中间件">Rack中定义的中间件</h3>
 
 <h4 id="racklock"><code class="highlighter-rouge">Rack::Lock</code></h4>
 <p>线程锁, 保证 rails 代码单线程运行, 同时设置 env[‘rack.multithread’] = false, 你可以通过设置 config.allow_concurrency = true 来去掉该中间件</p>
@@ -160,7 +160,7 @@
 <h4 id="railsracklogger"><code class="highlighter-rouge">Rails::Rack::Logger</code></h4>
 <p>比如 log/development.log 中的这一行 “Started GET “/” for 127.0.0.1 at Wed Sep 15 21:46:51 +0800 2010”</p>
 
-<h3 id="actiondispatch-">ActionDispatch 中定义的中间件</h3>
+<h3 id="actiondispatch-中定义的中间件">ActionDispatch 中定义的中间件</h3>
 
 <h4 id="actiondispatchstatic"><code class="highlighter-rouge">ActionDispatch::Static</code></h4>
 <p>静态文件(即 public/的文件)支持, 一般在生产环境下会禁用此功能</p>

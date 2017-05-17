@@ -141,20 +141,20 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h1 id="git">Git高级技巧之忽略文件</h1>
+<h1 id="git高级技巧之忽略文件">Git高级技巧之忽略文件</h1>
 
-<h2 id="section">前言</h2>
+<h2 id="前言">前言</h2>
 
 <p>前段时间新参与公司的一个项目，由于服务器 ruby 版本管理用的是 rvm，我在本地用的是 rbenv，这两个 ruby 版本管理软件都用到了<code class="highlighter-rouge">.ruby-version</code>作为配置文件，但是语法不一样。
 我的需求是在本地改动<code class="highlighter-rouge">.ruby-version</code>这个文件，但是让 git 忽略我在本地的改动。
 首先我想到的是使用<code class="highlighter-rouge">.gitignore</code>配置文件，但是使用<code class="highlighter-rouge">.gitignore</code>会将<code class="highlighter-rouge">.ruby-version</code>这个文件删除，这显然不是我想要的结果。
 那怎么解决这个问题呢？</p>
 
-<h2 id="git-">git 忽略文件的两个类型</h2>
+<h2 id="git-忽略文件的两个类型">git 忽略文件的两个类型</h2>
 
 <p>git 忽略文件的类型分为：临时忽略，永久忽略两个类型。<code class="highlighter-rouge">.gitignore</code>实际是属于永久忽略一个文件。</p>
 
-<h3 id="git--1">git 临时忽略文件</h3>
+<h3 id="git-临时忽略文件">git 临时忽略文件</h3>
 <p>命令：<code class="highlighter-rouge">git update-index --assume-unchanged &lt;file&gt;</code></p>
 
 <p>我先在项目下运行 git status，结果是这样的：</p>
@@ -214,14 +214,14 @@ H 404.html
 
 <p>有结就有解，继续跟踪的命令是：<code class="highlighter-rouge">git update-index --no-assume-unchanged &lt;file&gt;</code></p>
 
-<h3 id="section-1">永久忽略</h3>
+<h3 id="永久忽略">永久忽略</h3>
 
 <p>永久忽略一般大家都知道，主要就是<code class="highlighter-rouge">.gitignore</code>的配置，这个配置分为三个级别：</p>
-<h4 id="gitignore">项目中的<code class="highlighter-rouge">.gitignore</code>文件</h4>
+<h4 id="项目中的gitignore文件">项目中的<code class="highlighter-rouge">.gitignore</code>文件</h4>
 <p>这个是放在版本库里共享的；</p>
-<h4 id="gitinfoexclude">项目中<code class="highlighter-rouge">.git</code>目录下地<code class="highlighter-rouge">info/exclude</code>文件</h4>
+<h4 id="项目中git目录下地infoexclude文件">项目中<code class="highlighter-rouge">.git</code>目录下地<code class="highlighter-rouge">info/exclude</code>文件</h4>
 <p>这个是本地针对该项目忽略的，比如我 ruby 的项目用的编辑器会生成一个<code class="highlighter-rouge">.idea</code>的文件夹，就在这里配置忽略；</p>
-<h4 id="section-2">全局配置</h4>
+<h4 id="全局配置">全局配置</h4>
 <p>需要在<code class="highlighter-rouge">.gitconfig</code>文件中指定一个全局的配置文件路径，如：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>[core]

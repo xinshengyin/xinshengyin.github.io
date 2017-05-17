@@ -141,43 +141,43 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="section">基本概念</h2>
+<h2 id="基本概念">基本概念</h2>
 
-<h4 id="character">字符(Character)</h4>
+<h4 id="字符character">字符(Character)</h4>
 <p>指人类语言中最小的表义符号。
 例如‘a’、‘b’，‘好’等；</p>
 
-<h4 id="encoding">编码(Encoding)</h4>
+<h4 id="编码encoding">编码(Encoding)</h4>
 <p>给定一系列字符，对每个字符赋予一个数值，用数值来代表对应的字符。
 例如，我们给字符‘A’赋予数值0，给字符‘B’赋予数值1，则0就是字符‘A’的编码。</p>
 
-<h4 id="character-set">字符集(Character Set)</h4>
+<h4 id="字符集character-set">字符集(Character Set)</h4>
 <p>给定一系列字符并赋予对应的编码后，所有这些字符和编码对组成的集合。
 例如，给定字符列表为{’A’,’B’}时，{’A’=&gt;0, ‘B’=&gt;1}就是一个字符集；
 字符序(Collation)是指在同一字符集内字符之间的比较规则；
 确定字符序后，才能在一个字符集上定义什么是等价的字符，以及字符之间的大小关系；
 每个字符序唯一对应一种字符集，但一个字符集可以对应多种字符序，其中有一个是默认字符序(Default Collation)； MySQL中的字符序名称遵从命名惯例：以字符序对应的字符集名称开头；以_ci(表示大小写不敏感)、_cs(表示大小写敏感)或_bin(表示按编码值比较)结尾。例如：在字符序“utf8_general_ci”下，字符“a”和“A”是等价的；</p>
 
-<h2 id="mysql">MySQL中默认字符集的设置</h2>
+<h2 id="mysql中默认字符集的设置">MySQL中默认字符集的设置</h2>
 
-<h4 id="server">服务器级（Server）</h4>
+<h4 id="服务器级server">服务器级（Server）</h4>
 <ul>
   <li>默认的内部操作字符集。</li>
   <li>配置：character_set_server</li>
 </ul>
 
-<h4 id="db">数据库级（Db）</h4>
+<h4 id="数据库级db">数据库级（Db）</h4>
 <ul>
   <li>当前选中数据库的默认字符集</li>
   <li>配置： [mysqld] default-character-set=utf8</li>
 </ul>
 
-<h4 id="table">表级（Table）</h4>
+<h4 id="表级table">表级（Table）</h4>
 <ul>
   <li>配置及查看：<code class="highlighter-rouge">show full columns from &lt;tablename&gt;;</code></li>
 </ul>
 
-<h4 id="section-1">字段级</h4>
+<h4 id="字段级">字段级</h4>
 <ul>
   <li>注意前三种均为默认设置，并不代码你的字段最终会使用这个字符集设置。</li>
 </ul>

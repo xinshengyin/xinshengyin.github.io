@@ -141,7 +141,7 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="section">引子</h2>
+<h2 id="引子">引子</h2>
 
 <p>关于<code class="highlighter-rouge">require</code>,一般我们接受到的知识是这样的：</p>
 
@@ -161,7 +161,7 @@
 
 <p><code class="highlighter-rouge">require</code>并没有调用系统默认的Kernel#require，而是调用了位于<code class="highlighter-rouge">rubygems</code>中<code class="highlighter-rouge">core/ext/kernel_require.rb</code>中的Kernel#require函数。RubyGem用自己的require替代了系统默认的版本，并藉此实现了它自己的逻辑。</p>
 
-<h2 id="gemrequire">gem中的<code class="highlighter-rouge">require</code></h2>
+<h2 id="gem中的require">gem中的<code class="highlighter-rouge">require</code></h2>
 
 <p>那gem中的<code class="highlighter-rouge">require</code>到底都做了些什么呢？当我们调用<code class="highlighter-rouge">require 'a'</code>的时候，如果能够在$LOAD_PATH 中找到这个文件，那<code class="highlighter-rouge">require</code>的任务就完成了。如果没有找到，<code class="highlighter-rouge">require</code>就会调用<code class="highlighter-rouge">gem 'a'</code>,如果能够找到a这个gem，则将其加入$LOAD_PATH 中。</p>
 
@@ -193,7 +193,7 @@
 </code></pre>
 </div>
 
-<h2 id="gemgem">gem中的<code class="highlighter-rouge">gem</code>方法</h2>
+<h2 id="gem中的gem方法">gem中的<code class="highlighter-rouge">gem</code>方法</h2>
 
 <p>代码胜千言。我们在调用gem方法之前看下$LOAD_PATH 都有啥：</p>
 

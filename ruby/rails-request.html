@@ -143,7 +143,7 @@
 <div class="ui bottom attached segment">
 <p>每个web请求都有对应的 Request和Response，在Rails中，我们如何获取关于request的信息呢？</p>
 
-<h3 id="request">Request对象</h3>
+<h3 id="request对象">Request对象</h3>
 
 <p>在controller的实例中，可以通过request方法获取request对象</p>
 
@@ -152,7 +152,7 @@
 </code></pre>
 </div>
 
-<h2 id="request-1">Request对象包含的内容</h2>
+<h2 id="request对象包含的内容">Request对象包含的内容</h2>
 
 <h3 id="headers">Headers</h3>
 
@@ -196,7 +196,7 @@
 </code></pre>
 </div>
 
-<h3 id="section">请求内容</h3>
+<h3 id="请求内容">请求内容</h3>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">body</span>  <span class="c1"># =&gt; StringIO对象</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">body_stream</span>
@@ -210,7 +210,7 @@
 </code></pre>
 </div>
 
-<h3 id="mime">MIME等信息</h3>
+<h3 id="mime等信息">MIME等信息</h3>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">media_type</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">accepts</span>
@@ -221,7 +221,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-1">客户端、服务端、中间件信息</h3>
+<h3 id="客户端服务端中间件信息">客户端、服务端、中间件信息</h3>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">ip</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">remote_ip</span>
@@ -233,7 +233,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-2">缓存相关信息</h3>
+<h3 id="缓存相关信息">缓存相关信息</h3>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">request</span><span class="p">.</span><span class="nf">if_modified_since</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">if_none_match</span>

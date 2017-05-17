@@ -141,11 +141,11 @@
 </h1>
 
 <div class="ui bottom attached segment">
-<h2 id="section">日志功能实现</h2>
+<h2 id="日志功能实现">日志功能实现</h2>
 
 <p>Rails中对日志的处理采用的是“消息-订阅”机制，各部分组件和功能如下：</p>
 
-<h3 id="activesupportnotifications">日志消息的发送：<code class="highlighter-rouge">ActiveSupport::Notifications</code></h3>
+<h3 id="日志消息的发送activesupportnotifications">日志消息的发送：<code class="highlighter-rouge">ActiveSupport::Notifications</code></h3>
 
 <ul>
   <li><code class="highlighter-rouge">instrument</code>： 通知所有的 subscribers</li>
@@ -168,9 +168,9 @@
   </li>
 </ul>
 
-<h2 id="section-1">工作流程</h2>
+<h2 id="工作流程">工作流程</h2>
 
-<h3 id="section-2">安排下发通知的人</h3>
+<h3 id="安排下发通知的人">安排下发通知的人</h3>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 1、每个事件分配一个执行人员（员工）</span>
 <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="p">.</span><span class="nf">notifier</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="o">::</span><span class="no">Fanout</span><span class="p">.</span><span class="nf">new</span>
@@ -187,7 +187,7 @@
 </code></pre>
 </div>
 
-<h3 id="section-3">具体工作</h3>
+<h3 id="具体工作">具体工作</h3>
 
 <p>1、<code class="highlighter-rouge">Instrumenter</code>安排工作</p>
 
@@ -241,7 +241,7 @@
 </div>
 <p><code class="highlighter-rouge">delegate</code> 这个又是谁呢？</p>
 
-<h2 id="section-4">答案揭晓</h2>
+<h2 id="答案揭晓">答案揭晓</h2>
 
 <p>其实这个员工他也不干活，他将工作外包出去了！！！</p>
 
