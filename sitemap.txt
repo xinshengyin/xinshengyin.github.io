@@ -8,11 +8,11 @@
   http://www.xinshengyin.com/sitemap.txt
 
 
+  http://www.xinshengyin.com/about/ipsec
+
   http://www.xinshengyin.com/ruby/programer-think-with-product
 
   http://www.xinshengyin.com/ruby/file-dir-pathname
-
-  http://www.xinshengyin.com/what-is-pleaure
 
   http://www.xinshengyin.com/ruby/trace-point
 
@@ -65,5 +65,3 @@
   http://www.xinshengyin.com/ruby/ruby-env
 
   http://www.xinshengyin.com/ruby/rack-based-app-boot
-
-  http://www.xinshengyin.com/vacuous-topics

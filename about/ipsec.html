@@ -129,21 +129,111 @@
 		</div>
 	</div>
 	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>about</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/about/ipsec" class="item">搭建ipsec服务</a>
+			
+		</div>
+	</div>
+	
 </div>
   </div>
   <div class="content">
     <div class="ui basic segment">
 
 <h1 class="ui top attached center aligned header">
-  快乐与追求
+  搭建ipsec服务
 
   
 </h1>
 
 <div class="ui bottom attached segment">
-<p>有这么一个故事：</p>
+<h3 id="生成ca证书">生成ca证书</h3>
 
-<p>有只小猪</p>
+<ul>
+  <li>生成私钥： <code class="highlighter-rouge">ipsec pki --gen --outform pem &gt; ca.pem</code></li>
+  <li><code class="highlighter-rouge">ipsec pki --self --in ca.pem --dn "C=com, O=vpn, CN=VPN CA" --ca --outform pem &gt; ca.cert.pem</code></li>
+</ul>
+
+<h3 id="签名服务器证书">签名服务器证书</h3>
+<ul>
+  <li>生成私钥： <code class="highlighter-rouge">ipsec pki --gen --outform pem &gt; server.pem</code></li>
+  <li><code class="highlighter-rouge">ipsec pki --issue --in server.pem --type rsa --cakey ca.pem --cacert ca.cert.pem --dn "C=com, O=vpn, CN=52.193.249.79" --san 52.193.249.79 --flag serverAuth --flag ikeIntermediate --outform pem &gt; server.cert.pem</code></li>
+</ul>
+
+<h3 id="生成客户端证书">生成客户端证书</h3>
+<ul>
+  <li>私钥：<code class="highlighter-rouge">ipsec pki --gen --outform pem &gt; client.pem</code></li>
+  <li><code class="highlighter-rouge">ipsec pki --issue --in client.pem --type rsa --cakey ca.pem --cacert ca.cert.pem --dn "C=com, O=vpn, CN=VPN Client" --outform pem &gt; client.cert.pem</code></li>
+</ul>
+
+<h3 id="ipsec-配置文件">ipsec 配置文件</h3>
+
+<ul>
+  <li>文件名：ipsec.conf</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>config setup
+    uniqueids=never
+conn %default
+    keyexchange=ike
+    left=%any
+    leftsubnet=0.0.0.0/0
+    right=%any
+conn IKE-BASE
+    leftcert=server.cert.pem
+    rightsourceip=10.0.0.0/24
+# ios etc.
+conn by_cert
+    also=IKE-BASE
+    keyexchange=ikev1
+    fragmentation=yes
+    leftauth=pubkey
+    leftsubnet=0.0.0.0/0
+    rightauth=pubkey
+    rightauth2=xauth
+    rightcert=client.cert.pem
+    auto=add
+# ios etc.
+conn by_psk
+    also=IKE-BASE
+    keyexchange=ikev1
+    leftauth=psk
+    rightauth=psk
+    rightauth2=xauth
+    auto=add
+# osx linux android etc.
+conn by_key
+    also=IKE-BASE
+    keyexchange=ikev2
+    leftauth=pubkey
+    rightauth=pubkey
+    rightcert=client.cert.pem
+    auto=add
+# ikev2 (ios osx win7 etc.)
+conn IKEv2-EAP
+    also=IKE-BASE
+    keyexchange=ikev2
+    ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
+    esp=aes256-sha256,3des-sha1,aes256-sha1!
+    rekey=no
+    leftid=52.193.249.79
+    leftauth=pubkey
+    leftsendcert=always
+    rightfirewall=yes
+    rightsendcert=never
+    rightauth=eap-mschapv2
+    eap_identity=%any
+    dpdaction=clear
+    fragmentation=yes
+    auto=add
+</code></pre>
+</div>
 
 </div>
 

@@ -129,6 +129,18 @@
 		</div>
 	</div>
 	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>about</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/about/ipsec" class="item">搭建ipsec服务</a>
+			
+		</div>
+	</div>
+	
 </div>
   </div>
   <div class="content">
@@ -145,23 +157,23 @@
 
 <p>命令： <code class="highlighter-rouge">git log --pretty=raw</code>  查看详细的log信息</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">commit</span> <span class="mi">517</span><span class="n">e681c92d0055cc14147a47f819bdab7e7b853</span>
-<span class="n">tree</span> <span class="n">bc124180421117c94fb8498f29e28024a34b4eb4</span>
-<span class="n">parent</span> <span class="n">e4b4b22b08c3ee4218416c3d89e05d3ea410d291</span>
-<span class="n">parent</span> <span class="mi">926368</span><span class="n">c6cbb49c11d2f132acca12404a47a74e42</span>
-<span class="n">author</span> <span class="err">覃明圆</span> <span class="o">&lt;</span><span class="n">qinmingyuan</span><span class="vi">@boohee</span><span class="p">.</span><span class="nf">com</span><span class="o">&gt;</span> <span class="mi">1418984392</span> <span class="o">+</span><span class="mi">0800</span>
-<span class="n">committer</span> <span class="err">覃明圆</span> <span class="o">&lt;</span><span class="n">qinmingyuan</span><span class="vi">@boohee</span><span class="p">.</span><span class="nf">com</span><span class="o">&gt;</span> <span class="mi">1418984392</span> <span class="o">+</span><span class="mi">0800</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>commit 517e681c92d0055cc14147a47f819bdab7e7b853
+tree bc124180421117c94fb8498f29e28024a34b4eb4
+parent e4b4b22b08c3ee4218416c3d89e05d3ea410d291
+parent 926368c6cbb49c11d2f132acca12404a47a74e42
+author 覃明圆 &lt;qinmingyuan@boohee.com&gt; 1418984392 +0800
+committer 覃明圆 &lt;qinmingyuan@boohee.com&gt; 1418984392 +0800
 
-<span class="no">Merge</span> <span class="n">branch</span> <span class="s1">'hotfix/out_range_birthday'</span> <span class="n">into</span> <span class="s1">'master'</span>
-<span class="no">Hotfix</span><span class="o">/</span><span class="no">Out</span> <span class="no">Range</span> <span class="no">Birthday</span>
+Merge branch 'hotfix/out_range_birthday' into 'master'
+Hotfix/Out Range Birthday
 
-<span class="n">commit</span> <span class="mi">926368</span><span class="n">c6cbb49c11d2f132acca12404a47a74e42</span>
-<span class="n">tree</span> <span class="n">bc124180421117c94fb8498f29e28024a34b4eb4</span>
-<span class="n">parent</span> <span class="n">e4b4b22b08c3ee4218416c3d89e05d3ea410d291</span>
-<span class="n">author</span> <span class="n">qinmingyuan</span> <span class="o">&lt;</span><span class="n">mingyuan0715</span><span class="vi">@foxmail</span><span class="p">.</span><span class="nf">com</span><span class="o">&gt;</span> <span class="mi">1418983765</span> <span class="o">+</span><span class="mi">0800</span>
-<span class="n">committer</span> <span class="n">qinmingyuan</span> <span class="o">&lt;</span><span class="n">mingyuan0715</span><span class="vi">@foxmail</span><span class="p">.</span><span class="nf">com</span><span class="o">&gt;</span> <span class="mi">1418983765</span> <span class="o">+</span><span class="mi">0800</span>
+commit 926368c6cbb49c11d2f132acca12404a47a74e42
+tree bc124180421117c94fb8498f29e28024a34b4eb4
+parent e4b4b22b08c3ee4218416c3d89e05d3ea410d291
+author qinmingyuan &lt;mingyuan0715@foxmail.com&gt; 1418983765 +0800
+committer qinmingyuan &lt;mingyuan0715@foxmail.com&gt; 1418983765 +0800
 
-<span class="err">燃脂运动心率默认值</span>
+燃脂运动心率默认值
 </code></pre>
 </div>
 
@@ -170,18 +182,18 @@
 <p>命令：<code class="highlighter-rouge">git commit-tree &lt;tree&gt; -m &lt;message&gt;</code>  基于tree对象创建 commit对象
 这个命令的返回值是一个commit 对象</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="mi">5</span><span class="n">d002707dc6200c3156a19a90e55f332b23b664b</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>5d002707dc6200c3156a19a90e55f332b23b664b
 </code></pre>
 </div>
 
 <p><code class="highlighter-rouge">git cat-file -p 5d002707dc6200c3156a19a90e55f332b23b664b</code></p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 返回值</span>
-<span class="n">tree</span> <span class="n">bc124180421117c94fb8498f29e28024a34b4eb4</span>
-<span class="n">author</span> <span class="n">qinmingyuan</span> <span class="o">&lt;</span><span class="n">mingyuan0715</span><span class="vi">@foxmail</span><span class="p">.</span><span class="nf">com</span><span class="o">&gt;</span> <span class="mi">1419175304</span> <span class="o">+</span><span class="mi">0800</span>
-<span class="n">committer</span> <span class="n">qinmingyuan</span> <span class="o">&lt;</span><span class="n">mingyuan0715</span><span class="vi">@foxmail</span><span class="p">.</span><span class="nf">com</span><span class="o">&gt;</span> <span class="mi">1419175304</span> <span class="o">+</span><span class="mi">0800</span>
+<div class="highlighter-rouge"><pre class="highlight"><code># 返回值
+tree bc124180421117c94fb8498f29e28024a34b4eb4
+author qinmingyuan &lt;mingyuan0715@foxmail.com&gt; 1419175304 +0800
+committer qinmingyuan &lt;mingyuan0715@foxmail.com&gt; 1419175304 +0800
 
-<span class="kp">new</span> <span class="n">commit</span>
+new commit
 </code></pre>
 </div>
 
