@@ -66,4 +66,4 @@
 
   http://www.xinshengyin.com/ruby/rack-based-app-boot
 
-  http://www.xinshengyin.com/3-vacuous-topics
+  http://www.xinshengyin.com/vacuous-topics
