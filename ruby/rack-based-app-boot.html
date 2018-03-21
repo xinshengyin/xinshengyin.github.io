@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -159,13 +161,12 @@
 
 <p>config/boot.rb 内容如下:</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Set up gems listed in the Gemfile.</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set up gems listed in the Gemfile.</span>
 <span class="no">ENV</span><span class="p">[</span><span class="s1">'BUNDLE_GEMFILE'</span><span class="p">]</span> <span class="o">||=</span> <span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="s1">'../../Gemfile'</span><span class="p">,</span> <span class="kp">__FILE__</span><span class="p">)</span>
 
 <span class="nb">require</span> <span class="s1">'bundler/setup'</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'BUNDLE_GEMFILE'</span><span class="p">])</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>一般我们的项目中都会有一个<code class="highlighter-rouge">Gemfile</code>文件，用于声明项目所依赖的gem库。
 config/boot.rb中的<code class="highlighter-rouge">ENV['BUNDLE_GEMFILE']</code>指定了Gemfile文件的位置，当Gemfile存在，程序将require bundler/setup,然后 Bundler 会将所有gem加入load path。</p>
@@ -194,7 +195,7 @@ config/boot.rb中的<code class="highlighter-rouge">ENV['BUNDLE_GEMFILE']</code>
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

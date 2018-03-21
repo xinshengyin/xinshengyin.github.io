@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -165,11 +167,10 @@
 
 <p>扩展：可在通知前先执行一个代码块；</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="p">.</span><span class="nf">instrument</span><span class="p">(</span><span class="s1">'render'</span><span class="p">,</span> <span class="ss">extra: :information</span><span class="p">)</span> <span class="k">do</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="p">.</span><span class="nf">instrument</span><span class="p">(</span><span class="s1">'render'</span><span class="p">,</span> <span class="ss">extra: :information</span><span class="p">)</span> <span class="k">do</span>
   <span class="n">render</span> <span class="ss">text: </span><span class="s1">'Foo'</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>
@@ -184,7 +185,7 @@
 
 <h3 id="安排下发通知的人">安排下发通知的人</h3>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 1、每个事件分配一个执行人员（员工）</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 1、每个事件分配一个执行人员（员工）</span>
 <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="p">.</span><span class="nf">notifier</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="o">::</span><span class="no">Fanout</span><span class="p">.</span><span class="nf">new</span>
 
 <span class="c1"># 2、不能瞎指派员工，指派的员工须得有这个能力</span>
@@ -196,14 +197,13 @@
 <span class="k">def</span> <span class="nf">instrumenter</span>
   <span class="no">InstrumentationRegistry</span><span class="p">.</span><span class="nf">instance</span><span class="p">.</span><span class="nf">instrumenter_for</span><span class="p">(</span><span class="n">notifier</span><span class="p">)</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="具体工作">具体工作</h3>
 
 <p>1、<code class="highlighter-rouge">Instrumenter</code>安排工作</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Send a start notification with +name+ and +payload+.</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Send a start notification with +name+ and +payload+.</span>
 <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="vi">@notifier</span><span class="p">.</span><span class="nf">start</span> <span class="nb">name</span><span class="p">,</span> <span class="vi">@id</span><span class="p">,</span> <span class="n">payload</span>
 <span class="k">end</span>
@@ -212,12 +212,11 @@
 <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="vi">@notifier</span><span class="p">.</span><span class="nf">finish</span> <span class="nb">name</span><span class="p">,</span> <span class="vi">@id</span><span class="p">,</span> <span class="n">payload</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>2、<code class="highlighter-rouge">Fanout</code> 接受任务开始干活</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="n">listeners_for</span><span class="p">(</span><span class="nb">name</span><span class="p">).</span><span class="nf">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span class="p">.</span><span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>
 
@@ -230,13 +229,12 @@
 
   <span class="c1"># s 为`ActiveSupport::Notifications::Fanout::Subscribers::Evented`实例</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>干活的人多了个<code class="highlighter-rouge">publish</code>方法，反馈任务（员工需要汇报工作）</p>
 
 <p>3、<code class="highlighter-rouge">ActiveSupport::Notifications::Fanout::Subscribers::Evented</code> 具体的任务</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
   <span class="k">if</span> <span class="vi">@can_publish</span>
     <span class="vi">@delegate</span><span class="p">.</span><span class="nf">publish</span> <span class="nb">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span>
   <span class="k">end</span>
@@ -249,8 +247,7 @@
 <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="vi">@delegate</span><span class="p">.</span><span class="nf">finish</span> <span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p><code class="highlighter-rouge">delegate</code> 这个又是谁呢？</p>
 
 <h2 id="答案揭晓">答案揭晓</h2>
@@ -267,7 +264,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

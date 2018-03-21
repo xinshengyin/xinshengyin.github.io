@@ -8,6 +8,8 @@
   http://www.xinshengyin.com/sitemap.txt
 
 
+  http://www.xinshengyin.com/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B
+
   http://www.xinshengyin.com/%E5%B7%A5%E5%85%B7/ipsec
 
   http://www.xinshengyin.com/ruby/programer-think-with-product

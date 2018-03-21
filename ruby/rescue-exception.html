@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -156,42 +158,38 @@
 <p><code class="highlighter-rouge">Exception</code>是ruby中所以异常会继承的父类，当我们在ruby中rescue异常类的时候，如果没有指定具体的异常类。
 rescue拦截的实际是所有的标准类。</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">begin</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">begin</span>
   <span class="c1">#...</span>
 <span class="k">rescue</span>  <span class="c1"># 没有指定异常类，拦截异常类默认为 `StandardError`</span>
   <span class="c1">#...</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>可以为异常类指定一个变量</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">begin</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">begin</span>
   <span class="c1">#...</span>
 <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
   <span class="c1">#...</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>以上用法的完整版本为：</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">begin</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">begin</span>
   <span class="c1"># iceberg!</span>
 <span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
   <span class="c1"># lifeboats</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>以下用法会拦截所有的错误，通常情况下是不建议的。主要应用场景为日志相关。</p>
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">begin</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">begin</span>
 <span class="c1"># iceberg?</span>
 <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
 <span class="c1"># do some logging</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 </div>
 
@@ -203,7 +201,7 @@ rescue拦截的实际是所有的标准类。</p>
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

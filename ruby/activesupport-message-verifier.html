@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -186,20 +188,19 @@
   <li><code class="highlighter-rouge">@serializer</code>: 对象序列化方法，默认是：<code class="highlighter-rouge">Marshal</code>，可选的有<code class="highlighter-rouge">YAML, JSON, Marshal</code>等；</li>
 </ul>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># new 对象</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># new 对象</span>
 <span class="vi">@verifier</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">MessageVerifier</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'123456'</span><span class="p">)</span>
 <span class="c1"># =&gt; #&lt;ActiveSupport::MessageVerifier:0x007fe522132ba8 @secret="123456", @digest="SHA1", @serializer=Marshal&gt;</span>
 
 <span class="c1"># new 对象并指定serializer 为 YAML</span>
 <span class="vi">@verifier</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">MessageVerifier</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'123456'</span><span class="p">,</span> <span class="ss">serializer: </span><span class="no">YAML</span><span class="p">)</span>
 <span class="c1"># =&gt; #&lt;ActiveSupport::MessageVerifier:0x007fe522103448 @secret="123456", @digest="SHA1", @serializer=Psych&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>要加密的内容可为任何形式的对象，<code class="highlighter-rouge">MessageVerifier</code>对象会以指定的对象序列化方法进行序列化。
 示例中我们加密的对象是一个包含用户id及过期时间的数组：<code class="highlighter-rouge">[user_id, time]</code></p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 加密</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 加密</span>
 <span class="n">cookies</span><span class="p">[</span><span class="ss">:remember_me</span><span class="p">]</span> <span class="o">=</span> <span class="vi">@verifier</span><span class="p">.</span><span class="nf">generate</span><span class="p">([</span><span class="vi">@user</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="nf">weeks</span><span class="p">.</span><span class="nf">from_now</span><span class="p">])</span>
 
 <span class="c1"># 解密</span>
@@ -209,8 +210,7 @@
 <span class="k">if</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
   <span class="vi">@current_user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 </div>
 
@@ -222,7 +222,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

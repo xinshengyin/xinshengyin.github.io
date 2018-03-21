@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -165,7 +167,7 @@
 
 <p>在不同的模块中，方法<code class="highlighter-rouge">process_action</code>分别承载了一个功能，然后交处理通过<code class="highlighter-rouge">super</code>交给父类中的<code class="highlighter-rouge">process_action</code>继续处理。摘取其中一个方法的源码，如下：</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># File actionpack/lib/action_controller/metal/params_wrapper.rb, line 232</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># File actionpack/lib/action_controller/metal/params_wrapper.rb, line 232</span>
 <span class="k">def</span> <span class="nf">process_action</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">_wrapper_enabled?</span>
     <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="nf">parameters</span><span class="p">[</span><span class="n">_wrapper_key</span><span class="p">].</span><span class="nf">present?</span>
@@ -186,8 +188,7 @@
   <span class="k">end</span>
   <span class="k">super</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这是一个很有意思的利用ruby高级特性的设计。顺便提一下，我也是通过这个设计明白了，在ruby中为什么<code class="highlighter-rouge">方法名相同，参数数目不相同</code>并不被视作不同方法的一个好处了（否则这个黑魔法就不够好玩了）。</p>
 
@@ -195,10 +196,9 @@
 
 <p>经过几天的思考，找到了解决办法，简单且巧妙。</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">ActionController</span><span class="o">::</span><span class="no">HttpAuthentication</span><span class="o">::</span><span class="no">Token</span><span class="o">::</span><span class="no">ControllerMethods</span><span class="p">.</span><span class="nf">include</span> <span class="no">Light</span><span class="o">::</span><span class="no">Instrumentation</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">ActionController</span><span class="o">::</span><span class="no">HttpAuthentication</span><span class="o">::</span><span class="no">Token</span><span class="o">::</span><span class="no">ControllerMethods</span><span class="p">.</span><span class="nf">include</span> <span class="no">Light</span><span class="o">::</span><span class="no">Instrumentation</span>
 <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">include</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">HttpAuthentication</span><span class="o">::</span><span class="no">Token</span><span class="o">::</span><span class="no">ControllerMethods</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>即：首先在你想插入的位置所在的module中include你所自定义的module，然后在重新include一下所在位置的那个module。</p>
 
@@ -214,7 +214,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

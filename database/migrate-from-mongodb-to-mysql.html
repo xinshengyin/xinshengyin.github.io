@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -171,27 +173,25 @@
 
 <p>完整示例：</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mongoexport <span class="se">\</span>
--d status_dev <span class="se">\</span>
--c users <span class="se">\</span>
--q <span class="s2">"{'user_behavior.current_thin_plan_milestone': {'</span><span class="se">\$</span><span class="s2">ne': null} }"</span> <span class="se">\</span>
---csv <span class="se">\</span>
--f user_key,user_behavior.current_thin_plan_milestone,user_behavior.thin_plan_milestone_completed_on <span class="se">\</span>
--o ~/work/users.csv
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mongoexport <span class="se">\</span>
+<span class="nt">-d</span> status_dev <span class="se">\</span>
+<span class="nt">-c</span> <span class="nb">users</span> <span class="se">\</span>
+<span class="nt">-q</span> <span class="s2">"{'user_behavior.current_thin_plan_milestone': {'</span><span class="se">\$</span><span class="s2">ne': null} }"</span> <span class="se">\</span>
+<span class="nt">--csv</span> <span class="se">\</span>
+<span class="nt">-f</span> user_key,user_behavior.current_thin_plan_milestone,user_behavior.thin_plan_milestone_completed_on <span class="se">\</span>
+<span class="nt">-o</span> ~/work/users.csv
+</code></pre></div></div>
 
 <h3 id="导入csv格式数据至mysql">导入csv格式数据至mysql</h3>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">load</span> <span class="k">data</span> <span class="n">infile</span> <span class="s1">'~/work/users.csv'</span>   <span class="c1">-- 为了安全，如果文件路径为根路径，需要使用load data local infile</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">load</span> <span class="k">data</span> <span class="n">infile</span> <span class="s1">'~/work/users.csv'</span>   <span class="c1">-- 为了安全，如果文件路径为根路径，需要使用load data local infile</span>
 <span class="k">into</span> <span class="k">table</span> <span class="n">users</span>
 <span class="n">fields</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">','</span>  <span class="c1">-- 字段之间以逗号分隔</span>
 <span class="n">fields</span> <span class="n">enclosed</span> <span class="k">by</span> <span class="s1">'"'</span>  <span class="c1">-- 字符串以半角双引号包围</span>
 <span class="n">fields</span> <span class="n">escaped</span> <span class="k">by</span> <span class="s1">'"'</span>  <span class="c1">-- 字符串本身的双引号用"转义，即用两个双引号表示，也有用\转义</span>
 <span class="n">lines</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">'</span><span class="se">\r\n</span><span class="s1">'</span>  <span class="c1">-- 数据行之间以\r\n分隔</span>
 <span class="k">ignore</span> <span class="mi">1</span> <span class="n">lines</span><span class="p">;</span>  <span class="c1">-- 另外，第一行标题行需要单独设置。</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>里面最关键的部分就是格式参数，这个参数是根据RFC4180文档设置的，该文档全称Common Format and MIME Type for Comma-Separated Values (CSV) Files，其中详细描述了CSV格式。</p>
 
@@ -206,7 +206,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

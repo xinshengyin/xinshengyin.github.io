@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -206,14 +208,13 @@
 <h3 id="调用系统命令">调用系统命令</h3>
 <p>有两种方法可以调用系统命令，一种是使用两个“`”符号将系统命令包起来，一种是使用“system”方法。这两种方法的返回值有所区别。示例如下：</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sb">`pwd`</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sb">`pwd`</span>
 <span class="c1"># =&gt; "/Users/qin/project/blog\n"</span>
 
 <span class="nb">system</span> <span class="s1">'pwd'</span>
 <span class="c1"># 这里会答应出结果</span>
 <span class="c1"># =&gt; true</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>“`”包装的命令会返回字符串，<code class="highlighter-rouge">system</code>会将系统命令返回的字符串打印出来，并返回<code class="highlighter-rouge">true/false/nil</code>中的一个值。</p>
 
@@ -231,7 +232,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

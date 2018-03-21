@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -156,17 +158,16 @@
 <h3 id="概述">概述</h3>
 <p>我一直很好奇在Rails中，日志是如何记录一个Rails App运行的信息的。我查看了一下Rails的中间件，发现了<code class="highlighter-rouge">Rails::Rack::Logger</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># rake middleware
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># rake middleware
 ...
 use Rack::MethodOverride
 use Rails::Rack::Logger
 use ActionDispatch::ShowExceptions
 ...
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>查看<code class="highlighter-rouge">Rails::Rack::Logger</code>中实现记录日志的主要代码，发现了两个奇怪的类：<code class="highlighter-rouge">ActiveSupport::Notifications</code>和<code class="highlighter-rouge">ActiveSupport::LogSubscriber</code></p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">call_app</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">call_app</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
   <span class="c1"># ...</span>
   <span class="n">instrumenter</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="p">.</span><span class="nf">instrumenter</span>
   <span class="n">instrumenter</span><span class="p">.</span><span class="nf">start</span> <span class="s1">'request.action_dispatch'</span><span class="p">,</span> <span class="ss">request: </span><span class="n">request</span>
@@ -181,8 +182,7 @@ use ActionDispatch::ShowExceptions
   <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">LogSubscriber</span><span class="p">.</span><span class="nf">flush_all!</span>
 <span class="k">end</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="日志功能实现">日志功能实现</h3>
 
@@ -207,7 +207,7 @@ use ActionDispatch::ShowExceptions
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

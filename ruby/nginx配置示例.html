@@ -149,59 +149,35 @@
     <div class="ui basic segment">
 
 <h1 class="ui top attached center aligned header">
-  如何写rakefile
+  Nginx 配置示例
 
   
 </h1>
 
 <div class="ui bottom attached segment">
-<p>rake 是ruby世界里一个非常好用的任务构建工具，其江湖地位极高。</p>
+<h2 id="请求转发">请求转发</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+  listen 80;
+  server_name wechat.one.work;
+  location / {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_redirect off;
+    proxy_pass http://xx.xx.xxx.xx:20000;  # 外网IP
+  }
+}
 
-<h3 id="rake是如何工作的">rake是如何工作的</h3>
-
-<p>要在项目中运行rake命令，需要首先在项目中包含一个<code class="highlighter-rouge">Rakefile</code>文件。不然会报如下错误：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rake aborted!
-No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)
-
-(See full trace by running task with --trace)
 </code></pre></div></div>
 
-<p>我们来看看rake是如何运行的，rake命令的源码中主要是调用了<code class="highlighter-rouge">Rake::Application</code>对象的一个<code class="highlighter-rouge">run</code>方法：</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'rake'</span>
-
-<span class="no">Rake</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">run</span>
+<h2 id="websocket">websocket</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  location /cable {
+    proxy_pass  http://localhost:3001;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
 </code></pre></div></div>
-
-<p>Rake::Application对象的<code class="highlighter-rouge">run</code>方法主要做了以下三件事情：</p>
-
-<ul>
-  <li>Initialize the command line options (+init+).</li>
-  <li>Define the tasks (+load_rakefile+).</li>
-  <li>Run the top level tasks (+top_level+).</li>
-</ul>
-
-<h3 id="rakefile如何定义rake任务">rakefile如何定义rake任务</h3>
-
-<p>假设我们写了几个rake任务，目录结构如下：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootstrap/
-├── tasks/
-   ├── bootstrap.rake
-   └── test.rake
-</code></pre></div></div>
-<p>然后在<code class="highlighter-rouge">Rakefile</code>里<code class="highlighter-rouge">import</code>进来rake文件，代码如下：</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env rake</span>
-
-<span class="n">import</span> <span class="s1">'tasks/bootstrap.rake'</span>
-<span class="n">import</span> <span class="s1">'tasks/test.rake'</span>
-</code></pre></div></div>
-
-<p>rake的import方法 同 Ruby 的 require 不一样，import 并不是立即进行导入的，而是在整个 Rakefile 执行结束之后才全部导入，因此，可以在任意的地方写 import ，而不用担心依赖关系，需要共享的变量之类的只要在主 Rakefile 中定义了即可。</p>
-
-<p>运行<code class="highlighter-rouge">rake --tasks</code>就能看到任务正常加载进来了。</p>
 
 </div>
 

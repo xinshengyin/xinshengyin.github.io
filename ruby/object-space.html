@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -155,9 +157,8 @@
 <div class="ui bottom attached segment">
 <p>最近在调试bug的时候，遇到一个诡异的错误，错误信息中如下：</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1">#&lt;NoMethodError: undefined method `to_sym' for #&lt;Object:0x007ff53a0e1578&gt;&gt;</span>
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#&lt;NoMethodError: undefined method `to_sym' for #&lt;Object:0x007ff53a0e1578&gt;&gt;</span>
+</code></pre></div></div>
 
 <p>接下来我就懵了，这个<code class="highlighter-rouge">#&lt;Object:0x007ff53a0e1578&gt;</code>对象到底是什么，我该如何知道它的本来面目呢。于是我想到了<code class="highlighter-rouge">ObjectSpace</code></p>
 
@@ -166,7 +167,7 @@
 <p>每个对象都有一个唯一的<code class="highlighter-rouge">object_id</code>,<code class="highlighter-rouge">object_id</code>与内存地址存在一定的映射关系，上例中<code class="highlighter-rouge">0x007ff53a0e1578</code>就是这个对象内存地址的一个映射，其<code class="highlighter-rouge">object_id</code>为<code class="highlighter-rouge">0x007ff53a0e1578 / 2 = 70345608858300</code>。
 有了<code class="highlighter-rouge">object_id</code>，ObjectSpace就能帮我们还原这个对象的真实面目了。</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">ObjectSpace</span><span class="p">.</span><span class="nf">_id2ref</span><span class="p">(</span><span class="mi">70345608858300</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">ObjectSpace</span><span class="p">.</span><span class="nf">_id2ref</span><span class="p">(</span><span class="mi">70345608858300</span><span class="p">)</span>
 
 <span class="c1"># 返回结果如下</span>
 <span class="p">{</span>
@@ -179,8 +180,7 @@
                          <span class="s2">"ZSH"</span> <span class="o">=&gt;</span> <span class="s2">"/Users/qin/.oh-my-zsh"</span><span class="p">,</span>
                          <span class="c1"># …</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>原来这个Object对象就是ENV，这下问题就好查起了。</p>
 
 <p>除了<code class="highlighter-rouge">_id2ref</code>这个神奇的方法，ObjectSpace还提供了一些很有意思的方法。</p>
@@ -189,29 +189,28 @@
   <li>count_objects：统计各种类型的对象</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-       </span><span class="err">:TOTAL</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">419013,</span><span class="w">
-        </span><span class="err">:FREE</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">329,</span><span class="w">
-    </span><span class="err">:T_OBJECT</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">14056,</span><span class="w">
-     </span><span class="err">:T_CLASS</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">6063,</span><span class="w">
-    </span><span class="err">:T_MODULE</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">922,</span><span class="w">
-     </span><span class="err">:T_FLOAT</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">9,</span><span class="w">
-    </span><span class="err">:T_STRING</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">250253,</span><span class="w">
-    </span><span class="err">:T_REGEXP</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">2352,</span><span class="w">
-     </span><span class="err">:T_ARRAY</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">61635,</span><span class="w">
-      </span><span class="err">:T_HASH</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">10083,</span><span class="w">
-    </span><span class="err">:T_STRUCT</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">481,</span><span class="w">
-    </span><span class="err">:T_BIGNUM</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">13,</span><span class="w">
-      </span><span class="err">:T_FILE</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">29,</span><span class="w">
-      </span><span class="err">:T_DATA</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">40450,</span><span class="w">
-     </span><span class="err">:T_MATCH</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">134,</span><span class="w">
-   </span><span class="err">:T_COMPLEX</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">1,</span><span class="w">
-  </span><span class="err">:T_RATIONAL</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">891,</span><span class="w">
-      </span><span class="err">:T_NODE</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">29990,</span><span class="w">
-    </span><span class="err">:T_ICLASS</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">1322</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+       :TOTAL =&gt; 419013,
+        :FREE =&gt; 329,
+    :T_OBJECT =&gt; 14056,
+     :T_CLASS =&gt; 6063,
+    :T_MODULE =&gt; 922,
+     :T_FLOAT =&gt; 9,
+    :T_STRING =&gt; 250253,
+    :T_REGEXP =&gt; 2352,
+     :T_ARRAY =&gt; 61635,
+      :T_HASH =&gt; 10083,
+    :T_STRUCT =&gt; 481,
+    :T_BIGNUM =&gt; 13,
+      :T_FILE =&gt; 29,
+      :T_DATA =&gt; 40450,
+     :T_MATCH =&gt; 134,
+   :T_COMPLEX =&gt; 1,
+  :T_RATIONAL =&gt; 891,
+      :T_NODE =&gt; 29990,
+    :T_ICLASS =&gt; 1322
+}
+</code></pre></div></div>
 <p>基本类型的统计信息一应俱全；</p>
 
 <p>更多方法请参考文档。</p>
@@ -226,7 +225,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -157,7 +159,7 @@
 
 <h3 id="activesupportsubscriber-负责干活的订阅者"><code class="highlighter-rouge">ActiveSupport::Subscriber</code> 负责干活的订阅者</h3>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="n">e</span> <span class="o">=</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="n">parent</span> <span class="o">=</span> <span class="n">event_stack</span><span class="p">.</span><span class="nf">last</span>
   <span class="n">parent</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="k">if</span> <span class="n">parent</span>
@@ -174,12 +176,11 @@
   <span class="nb">method</span> <span class="o">=</span> <span class="nb">name</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">).</span><span class="nf">first</span>
   <span class="nb">send</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="activesupportlogsubscriber--activesupportsubscriber"><code class="highlighter-rouge">ActiveSupport::LogSubscriber &lt; ActiveSupport::Subscriber</code></h2>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
   <span class="k">super</span> <span class="k">if</span> <span class="n">logger</span>
 <span class="k">end</span>
 
@@ -188,8 +189,7 @@
 <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
   <span class="n">logger</span><span class="p">.</span><span class="nf">error</span> <span class="s2">"Could not log </span><span class="si">#{</span><span class="nb">name</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2"> event. </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">class</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这里的 logger 实际是 Rails.logger</p>
 
@@ -205,7 +205,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>

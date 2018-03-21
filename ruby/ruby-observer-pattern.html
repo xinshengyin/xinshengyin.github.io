@@ -54,6 +54,8 @@
 		</a>
 		<div class="menu content">
 			
+			<a href="/ruby/nginx%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" class="item">Nginx 配置示例</a>
+			
 			<a href="/ruby/programer-think-with-product" class="item">工程师的产品观</a>
 			
 			<a href="/ruby/file-dir-pathname" class="item">理理File/Dir/Pathname（一）</a>
@@ -170,7 +172,7 @@
 
 <p>下面我们利用ruby标准库中自带的<code class="highlighter-rouge">observer</code>库来实现一个观察者模式的范例。</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'observer'</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'observer'</span>
 
 <span class="c1"># 被观察者</span>
 <span class="k">class</span> <span class="nc">ObservableTarget</span>
@@ -195,12 +197,11 @@
   <span class="k">end</span>
 
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>调用代码</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># 被观察者初始化</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 被观察者初始化</span>
 <span class="n">target</span> <span class="o">=</span> <span class="no">ObservableTarget</span><span class="p">.</span><span class="nf">new</span>
 
 <span class="c1"># 观察者初始化</span>
@@ -227,8 +228,7 @@
 <span class="n">target</span><span class="p">.</span><span class="nf">notify_observers</span><span class="p">(</span><span class="s2">"发工资了"</span><span class="p">)</span>
 <span class="c1"># =&gt; 通知小媳妇发工资了</span>
 <span class="c1"># =&gt; 通知小情人发工资了</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 </div>
 
@@ -240,7 +240,7 @@
 <footer>
   <div class="ui divider"></div>
   <div class="ui center aligned segment basic">
-    <p class="text-center text-muted">&copy; 2017 www.xinshengyin.com All rights reserved.  </p>
+    <p class="text-center text-muted">&copy; 2018 www.xinshengyin.com All rights reserved.  </p>
     <p class="text-center text-muted">版权所有</p>
   </div>
 </footer>
