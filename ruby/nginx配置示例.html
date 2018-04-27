@@ -143,6 +143,18 @@
 		</div>
 	</div>
 	
+	<div class="item ui dropdown">
+		<a class="title">
+			<i class="alarm outline icon"></i>
+			<span>linux</span>
+		</a>
+		<div class="menu content">
+			
+			<a href="/linux/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="item">Linux 常用查看命令</a>
+			
+		</div>
+	</div>
+	
 </div>
   </div>
   <div class="content">
@@ -155,6 +167,31 @@
 </h1>
 
 <div class="ui bottom attached segment">
+<h2 id="puma应用">puma应用</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream myapp {
+  server tcp://0.0.0.0:3001;
+}
+
+server {
+  listen 80;
+  server_name www.one.work;
+  
+  location /cable {
+    proxy_pass http://localhost:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+  
+  location / {
+    root /opt/srv/xxxx/current/public;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_pass http://myapp;
+  }
+}
+</code></pre></div></div>
+
 <h2 id="请求转发">请求转发</h2>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
   listen 80;
